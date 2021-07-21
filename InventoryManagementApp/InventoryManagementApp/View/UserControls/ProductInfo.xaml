@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="InventoryManagementApp.View.UserControls.ProductInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:InventoryManagementApp.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <UserControl.Resources>
+        <converters:EmptyImageToImageSourceConverter x:Key="EmptyImageToImageSourceConverter" />
+        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </UserControl.Resources>
+    
+    <ScrollViewer>
+        <Grid Margin="10, 15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Image Height="180" Width="270" Source="{Binding ImageUrl, IsAsync=True, Converter={StaticResource EmptyImageToImageSourceConverter}}" />
+            <TextBlock Grid.Row="1" HorizontalAlignment="Center">
+                <Run Text="Id: "/>
+                <Run Text="{Binding Id}"/>
+            </TextBlock>
+            <Grid Grid.Column="1" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.ColumnSpan="2" Text="{Binding Description}" TextWrapping="Wrap" FontWeight="Bold"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,20">
+                <Run Text="Unit Price: " FontStyle="Oblique"/>
+                <Run Text="{Binding UnitPrice, StringFormat=$ {0}}" FontWeight="Bold"/>
+                </TextBlock>
+
+                <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,20" >
+                <Run Text="Quantity: " FontStyle="Oblique"/>
+                <Run Text="{Binding Quantity, StringFormat={}{0} nos}" FontWeight="Bold"/>
+                </TextBlock>
+
+                <Button Grid.Column="1" Grid.Row="2" Content="Add to Order" Padding="20,10" HorizontalAlignment="Center"  VerticalAlignment="Top" 
+                    Command="{Binding AddToOrderCommand, Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1,AncestorType=UserControl}}" CommandParameter="{Binding}"
+                    ToolTip="Add the product to the current Order list">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Quantity}" Value="0">
+                                    <Setter Property="Button.IsEnabled" Value="False"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

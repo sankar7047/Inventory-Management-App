@@ -1,0 +1,234 @@
+﻿<fluent:RibbonWindow x:Class="InventoryManagementApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:InventoryManagementApp.ViewModel"
+        xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:fluent="urn:fluent-ribbon"
+        xmlns:uc="clr-namespace:InventoryManagementApp.View.UserControls"
+        xmlns:converters="clr-namespace:InventoryManagementApp.Converters"
+        xmlns:interaction="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        Title="Inventory Management App"
+        x:Name="root">
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+
+    <Window.Resources>
+        <converters:MultiplyingConverter x:Key="MultiplyingConverter" />
+        <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1.6*"/>
+            <RowDefinition Height="2"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Ribbon-->
+        <fluent:Ribbon Grid.ColumnSpan="3">
+            <fluent:RibbonTabItem Header="Menu" IsOpen="False" ToolTip="Menu">
+                <fluent:RibbonGroupBox>
+                    <fluent:Button Header="Create Order" Margin="5,0" Command="{Binding CreateOrderCommand}" ToolTip="Creates new Order Tab">
+                        <fluent:Button.LargeIcon>
+                            <Path Data="M25.053024,27.040001L32.007024,27.040001 32.007024,37.927001 42.892025,37.927001 42.892025,44.879002 32.007024,44.879002 32.007024,55.765001 25.053024,55.765001 25.053024,44.879002 14.168024,44.879002 14.168024,37.927001 25.053024,37.927001z M22.158013,5.3900852L21.795012,17.160269C21.795013,17.160269,21.325013,24.950391,12.748007,24.010376L5.3960018,23.810373 5.3960018,57.250895C5.3960018,57.990908,6.0030022,58.600916,6.748003,58.600916L44.532026,58.600916C45.274027,58.600916,45.881027,57.990908,45.881027,57.250895L45.881027,6.7401066C45.881027,6.0000954,45.274027,5.3900852,44.532026,5.3900852z M21.805013,0L44.532026,0C48.25803,0,51.280031,3.0200481,51.280031,6.7401066L51.280031,57.250895C51.280031,60.980953,48.25803,64.000999,44.532026,64.000999L6.748003,64.000999C3.0210018,64.000999,0,60.980953,0,57.250895L0,23.00036 2.6720009,20.180316 2.6750011,20.100315 16.67801,5.3900852 16.63801,5.3900852 12.895007,9.340147 16.81701,5.1900826 16.87301,5.1900826 16.99601,5.0600796 17.00801,5.0600796z" 
+                                  Stretch="Uniform" Fill="#000000" Width="22" Height="22" RenderTransformOrigin="0.5,0.5">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </fluent:Button.LargeIcon>
+                    </fluent:Button>
+                    <fluent:Button Header="Remove Order" Margin="5,0" Command="{Binding RemoveOrderCommand}" ToolTip="Removes the current Order Tab">
+                        <fluent:Button.LargeIcon>
+                            <Path Data="M36.22753,28.790352L41.143007,33.70645 33.445183,41.404016 41.143009,49.101177 36.22753,54.017351 28.529486,46.31955 20.831426,54.017351 15.916008,49.101173 23.613615,41.403832 15.916008,33.706469 20.831426,28.791351 28.529179,36.488438z M22.157012,5.3899994L21.794013,17.16C21.794013,17.16,21.324012,24.95,12.747007,24.01L5.3960037,23.809999 5.3960037,57.25C5.3960028,57.99,6.0020027,58.6,6.7470036,58.6L44.531027,58.6C45.273027,58.6,45.880028,57.99,45.880028,57.25L45.880028,6.7399998C45.880028,6,45.273027,5.3899994,44.531027,5.3899994z M21.804013,0L44.531027,0C48.25803,0,51.280029,3.0200005,51.280029,6.7399998L51.280029,57.25C51.280029,60.98,48.25803,64,44.531027,64L6.7470036,64C3.0210009,64,-9.5367432E-07,60.98,0,57.25L0,23 2.6720009,20.179999 2.6740017,20.099999 16.677009,5.3899994 16.63801,5.3899994 12.894007,9.3400002 16.81601,5.1900005 16.87201,5.1900005 16.996009,5.0599995 17.008009,5.0599995z" 
+                                  Stretch="Uniform" Fill="#FF000000" Width="22" Height="22" RenderTransformOrigin="0.5,0.5">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </fluent:Button.LargeIcon>
+                    </fluent:Button>
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
+        </fluent:Ribbon>
+
+        <!--Products DataGrid-->
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="Products">
+            <Grid>
+                <DataGrid x:Name="productsDataGrid" ItemsSource="{Binding ProductList}" 
+                      AutoGenerateColumns="False" ColumnWidth="Auto" IsReadOnly="True"
+                      SelectedIndex="0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                        <DataGridTextColumn Header="Unit Price" Binding="{Binding UnitPrice, StringFormat=$ {0}}" Width="*"/>
+                        <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <mahapps:ProgressRing IsActive="{Binding IsBusy}" Foreground="{DynamicResource MahApps.Brushes.Accent}"/>
+            </Grid>
+        </GroupBox>
+
+        <GridSplitter Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Width="5" HorizontalAlignment="Stretch" />
+
+        <!--Products Info-->
+        <GroupBox Grid.Row="3" Grid.Column="0" DataContext="{Binding SelectedItem, ElementName=productsDataGrid}" Header="{Binding Name}">
+            <uc:ProductInfo AddToOrderCommand="{Binding DataContext.AddToOrderCommand, ElementName=productsDataGrid}"/>
+        </GroupBox>
+
+        <GridSplitter Grid.Column="0" Grid.Row="2" Height="5" VerticalAlignment="Stretch" />
+
+        <!--Orders-->
+        <GroupBox Header="Orders" Grid.Row="1" Grid.RowSpan="3" Grid.Column="2">
+            <TabControl ItemsSource="{Binding Orders}" SelectedIndex="{Binding SelectedTabItemIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsSynchronizedWithCurrentItem="True">
+                <interaction:Interaction.Triggers>
+                    <interaction:EventTrigger EventName="SelectionChanged">
+                        <interaction:InvokeCommandAction Command="{Binding OrdersSelectionChangedCommand}" CommandParameter="{Binding}" />
+                    </interaction:EventTrigger>
+                </interaction:Interaction.Triggers>
+                <TabControl.ItemContainerStyle>
+                    <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+                        <Setter Property="Header" Value="{Binding OrderTitle}"/>
+                    </Style>
+                </TabControl.ItemContainerStyle>
+
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <ListBox ItemsSource="{Binding OrderList}" IsEnabled="{Binding IsOrderPlaced, Converter={StaticResource InverseBoolConverter}}">
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="Margin" Value="0"/>
+
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                                    <Border>
+                                                        <Border.Style>
+                                                            <Style TargetType="Border">
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsEnabled" Value="False">
+                                                                        <Setter Property="Opacity" Value="0.5"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                        <ContentPresenter/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Button Grid.Column="2" HorizontalAlignment="Right" BorderThickness="0" Style="{DynamicResource MahApps.Styles.Button.Circle}" Command="{Binding DataContext.RemoveProductCommand, ElementName=root}" CommandParameter="{Binding}"
+                                                    ToolTip="Removes the Product from the list" FocusVisualStyle="{x:Null}">
+                                                <Path Data="M19.85228,12.08996L12.093,19.849201 24.242323,31.997846 12.094,44.145998 19.852051,51.904958 32.001186,39.756277 44.150543,51.904958 51.909,44.145994 39.760246,31.997501 51.909,19.849201 44.15049,12.08996 32.001431,24.238849z M32,0C49.671021,3.1599484E-07 64,14.329407 64,31.998501 64,49.677606 49.671021,63.997003 32,63.997003 14.328003,63.997003 0,49.677606 0,31.998501 0,14.329407 14.328003,3.1599484E-07 32,0z" 
+                                                      Stretch="Uniform" Fill="#FF33" Width="26" Height="26" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False">
+                                                    <Path.RenderTransform>
+                                                        <TransformGroup>
+                                                            <TransformGroup.Children>
+                                                                <RotateTransform Angle="0" />
+                                                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                                                            </TransformGroup.Children>
+                                                        </TransformGroup>
+                                                    </Path.RenderTransform>
+                                                </Path>
+                                            </Button>
+                                            
+                                            <TextBlock Text="{Binding Product.Name}" Grid.ColumnSpan="2" Margin="0,10" FontSize="18"/>
+                                            <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Left">
+                                                <TextBlock Text="Quantity:"/>
+                                                <mahapps:NumericUpDown x:Name="quantity" FontWeight="Bold" Minimum="1" Value="{Binding OrderQuantity, Mode=TwoWay}" Maximum="{Binding Product.Quantity}" InterceptManualEnter="False">
+                                                    <interaction:Interaction.Triggers>
+                                                        <interaction:EventTrigger EventName="ValueDecremented">
+                                                            <interaction:InvokeCommandAction Command="{Binding DataContext.OrderQuantityDecrementedCommand, ElementName=root}" CommandParameter="{Binding}" />
+                                                        </interaction:EventTrigger>
+                                                        <interaction:EventTrigger EventName="ValueIncremented">
+                                                            <interaction:InvokeCommandAction Command="{Binding DataContext.OrderQuantityIncrementedCommand, ElementName=root}" CommandParameter="{Binding}" />
+                                                        </interaction:EventTrigger>
+                                                    </interaction:Interaction.Triggers>
+                                                </mahapps:NumericUpDown>
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                <TextBlock Text="Unit Price:"/>
+                                                <TextBlock FontWeight="Bold" FontSize="14">
+                                                    <Run Text="{Binding Product.UnitPrice, StringFormat={}${0} *}"/>
+                                                    <Run Text="{Binding Value, ElementName=quantity}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                <TextBlock Text="Price:"/>
+                                                <TextBlock Grid.ColumnSpan="3" FontSize="14" FontWeight="Bold">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding Converter="{StaticResource MultiplyingConverter}" StringFormat="${0}">
+                                                            <Binding Path="Product.UnitPrice" />
+                                                            <Binding Path="Value" ElementName="quantity" />
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                            <Button Grid.Row="1" Content="Place Order" Padding="20,10" Margin="20,10" HorizontalAlignment="Right" VerticalAlignment="Top" ToolTip="Place the Order" Command="{Binding DataContext.PlaceOrderCommand, ElementName=root}" CommandParameter="{Binding}" >
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding OrderList.Count}" Value="0">
+                                                <Setter Property="Button.IsEnabled" Value="False"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsOrderPlaced}" Value="True">
+                                                <Setter Property="Button.IsEnabled" Value="False" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </Grid>
+
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+        </GroupBox>
+    </Grid>
+</fluent:RibbonWindow>
